@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Рябов](https://up.htmlacademy.ru/javascript/18/user/1110293).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Лутогин](https://htmlacademy.ru/profile/id1096725).
 
 ---
 
