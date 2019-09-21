@@ -3,11 +3,11 @@
 
 // Количество объявлений
 var ADS_QUANTITY = 8;
-//  Адрес изображения
-var AUTHOR_AVATAR  = ['01', '02', '03', '04', '05', '05', '05', '05'];
+// Адрес изображения
+var AUTHOR_AVATAR = ['01', '02', '03', '04', '05', '05', '05', '05'];
 //  Заголовок предложения
 var OFFER_TITLE = ['заголовок предложения1', 'заголовок предложения2', 'заголовок предложения3', 'заголовок предложения4', 'заголовок предложения5', 'заголовок предложения6', 'заголовок предложения7', 'заголовок предложения8'];
-//Адрес предложения
+// Адрес предложения
 var OFFER_ADDRESS_X = ['600', '650', '625', '660', '640', '630', '610', '620'];
 var OFFER_ADDRESS_Y = ['300', '350', '325', '360', '340', '330', '310', '320'];
 // Cтоимость
@@ -18,11 +18,11 @@ var OFFER_TYPE = ['palace', 'flat', 'house', 'bungalo'];
 var OFFER_ROOMS = [1, 2, 3, 4];
 // Количество гостей, которое можно разместить
 var OFFER_GUESTS = [1, 2, 3, 4];
-//Время заезда
+// Время заезда
 var OFFER_CHECKIN = ['12:00', '13:00', '14:00'];
-//Время вызаезда
+// Время вызаезда
 var OFFER_CHECKOUT = ['12:00', '13:00', '14:00'];
-//Опции
+// Опции
 var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 // Описание
 var OFFER_DESCRIPTION = ['строка с описанием1', 'строка с описанием2', 'строка с описанием3'];
@@ -56,9 +56,9 @@ var arrayRandElement = function (arr) {
 var pins = [];
 for (var i = 0; i < ADS_QUANTITY; i++) {
   pins.push({
-    author:{
+    author: {
       avatar: 'img/avatars/' + 'user' + arrayRandElement(AUTHOR_AVATAR) + '.png'
-  },
+    },
     offer: {
       title: arrayRandElement(OFFER_TITLE),
       address: arrayRandElement(OFFER_ADDRESS_X) + ',' + ' ' + arrayRandElement(OFFER_ADDRESS_Y),
@@ -75,8 +75,8 @@ for (var i = 0; i < ADS_QUANTITY; i++) {
     location: {
       x: arrayRandElement(LOCATION_X),
       y: arrayRandElement(LOCATION_Y)
-  }
- });
+    }
+  });
 }
 
 
@@ -90,7 +90,7 @@ var renderPin = function (pin) {
 
   pinElement.setAttribute('style', 'left: ' + pin.location.x + 'px; top: ' + pin.location.y + 'px;');
   pinElement.querySelector('img').src = pin.author.avatar;
-  pinElement.querySelector('img').alt =  pin.offer.title;
+  pinElement.querySelector('img').alt = pin.offer.title;
 
   return pinElement;
 };
