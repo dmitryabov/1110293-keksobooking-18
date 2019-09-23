@@ -32,6 +32,7 @@ var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http:
 var LOCATION_X = [100, 700, 300, 600, 500, 900];
 var LOCATION_Y = [230, 300, 450, 500, 350, 330];
 
+
 // Переключаем карту из неактивного состояния в активное
 var mapRegime = document.querySelector('.map');
 mapRegime.classList.remove('map--faded');
@@ -45,7 +46,13 @@ var similarPinTemplate = document.querySelector('#pin')
     .querySelector('.map__pin');
 
 
-// Выбирает случайные данные из массива
+/**
+ *Выбирает случайное значение из массива
+ *
+ *@param  arr object массив с данными.
+ *
+ *@return возвращает случайное значение из массива.
+ */
 var arrayRandElement = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   return arr[rand];
@@ -53,8 +60,16 @@ var arrayRandElement = function (arr) {
 
 
 // Массив случайно сгенерырованных объявлений
+/**
+ *Создает массив случайно сгенерированных объявлений.
+ *
+ *@param  quantity int колличество массивов.
+ *
+ *@return возвращает массивы.
+ */
+var generationArray = function (quantity) {
 var pins = [];
-for (var i = 0; i < ADS_QUANTITY; i++) {
+for (var i = 0; i < quantity; i++) {
   pins.push({
     author: {
       avatar: 'img/avatars/' + 'user' + arrayRandElement(AUTHOR_AVATAR) + '.png'
@@ -78,14 +93,22 @@ for (var i = 0; i < ADS_QUANTITY; i++) {
     }
   });
 }
+ return pins;
+};
 
 
-/*
-Отрисовывает шаблон в документ
-@param  ad object массив с данными объявлений
-@return возвращает объявление
-*/
-var renderPin = function (pin) {
+// Создаем массивы.
+generationArray(ADS_QUANTITY);
+
+
+/**
+ *Отрисовывает шаблон в документ
+ *
+ *@param  pin object массив с данными объявлений.
+ *
+ *@return object возвращает объявление.
+ */
+var renderPin = function(pin) {
   var pinElement = similarPinTemplate.cloneNode(true);
 
   pinElement.setAttribute('style', 'left: ' + pin.location.x + 'px; top: ' + pin.location.y + 'px;');
@@ -96,13 +119,22 @@ var renderPin = function (pin) {
 };
 
 
-// Отрисовывает шаблон в докумен
-var fragment = document.createDocumentFragment();
-for (var j = 0; j < pins.length; j++) {
-  fragment.appendChild(renderPin(pins[j]));
-}
+/**
+*Добавляет шаблон в документ
+*
+*@param  array object массив с данными.
+*
+*@return object возвращает объявление.
+*/
+var addTemplate = function(array) {
+  var fragment = document.createDocumentFragment();
+  for (var j = 0; j < array.length; j++) {
+      fragment.appendChild(renderPin(array[j]));
+  };
+  return fragment;
+};
 
 
-similarListElement.appendChild(fragment);
+similarListElement.appendChild(addTemplate(generationArray(ADS_QUANTITY)));
 
 mapRegime.querySelector('.map__pins').classList.remove('map--faded');
