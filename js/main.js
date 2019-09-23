@@ -49,7 +49,7 @@ var similarPinTemplate = document.querySelector('#pin')
 /**
  *Выбирает случайное значение из массива
  *
- *@param  arr object массив с данными.
+ *@param {array} arr Массив с данными.
  *
  *@return возвращает случайное значение из массива.
  */
@@ -63,34 +63,34 @@ var arrayRandElement = function (arr) {
 /**
  *Создает массив случайно сгенерированных объявлений.
  *
- *@param  quantity int колличество массивов.
+ *@param  {int} quantity колличество массивов.
  *
  *@return возвращает массивы.
  */
 var generationArray = function (quantity) {
-var pins = [];
-for (var i = 0; i < quantity; i++) {
-  pins.push({
-    author: {
-      avatar: 'img/avatars/' + 'user' + arrayRandElement(AUTHOR_AVATAR) + '.png'
-    },
-    offer: {
-      title: arrayRandElement(OFFER_TITLE),
-      address: arrayRandElement(OFFER_ADDRESS_X) + ',' + ' ' + arrayRandElement(OFFER_ADDRESS_Y),
-      price: arrayRandElement(OFFER_PRICE),
-      type: arrayRandElement(OFFER_TYPE),
-      rooms: arrayRandElement(OFFER_ROOMS),
-      guests: arrayRandElement(OFFER_GUESTS),
-      checkin: arrayRandElement(OFFER_CHECKIN),
-      checkout: arrayRandElement(OFFER_CHECKOUT),
-      features: arrayRandElement(OFFER_FEATURES),
-      description: arrayRandElement(OFFER_DESCRIPTION),
-      photos: arrayRandElement(OFFER_PHOTOS)
-    },
-    location: {
-      x: arrayRandElement(LOCATION_X),
-      y: arrayRandElement(LOCATION_Y)
-    }
+  var pins = [];
+  for (var i = 0; i < quantity; i++) {
+    pins.push({
+      author: {
+        avatar: 'img/avatars/' + 'user' + arrayRandElement(AUTHOR_AVATAR) + '.png'
+      },
+      offer: {
+        title: arrayRandElement(OFFER_TITLE),
+        address: arrayRandElement(OFFER_ADDRESS_X) + ',' + ' ' + arrayRandElement(OFFER_ADDRESS_Y),
+        price: arrayRandElement(OFFER_PRICE),
+        type: arrayRandElement(OFFER_TYPE),
+        rooms: arrayRandElement(OFFER_ROOMS),
+        guests: arrayRandElement(OFFER_GUESTS),
+        checkin: arrayRandElement(OFFER_CHECKIN),
+        checkout: arrayRandElement(OFFER_CHECKOUT),
+        features: arrayRandElement(OFFER_FEATURES),
+        description: arrayRandElement(OFFER_DESCRIPTION),
+        photos: arrayRandElement(OFFER_PHOTOS)
+      },
+     location: {
+       x: arrayRandElement(LOCATION_X),
+       y: arrayRandElement(LOCATION_Y)
+     }
   });
 }
  return pins;
@@ -104,9 +104,9 @@ generationArray(ADS_QUANTITY);
 /**
  *Отрисовывает шаблон в документ
  *
- *@param  pin object массив с данными объявлений.
+ *@param  {object} pin массив с данными объявлений.
  *
- *@return object возвращает объявление.
+ *@return {object} возвращает объявление.
  */
 var renderPin = function(pin) {
   var pinElement = similarPinTemplate.cloneNode(true);
@@ -122,15 +122,15 @@ var renderPin = function(pin) {
 /**
 *Добавляет шаблон в документ
 *
-*@param  array object массив с данными.
+*@param  {array} array массив с данными.
 *
-*@return object возвращает объявление.
+*@return возвращает объявление.
 */
 var addTemplate = function(array) {
   var fragment = document.createDocumentFragment();
   for (var j = 0; j < array.length; j++) {
       fragment.appendChild(renderPin(array[j]));
-  };
+  }
   return fragment;
 };
 
