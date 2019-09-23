@@ -4,33 +4,130 @@
 // Количество объявлений
 var ADS_QUANTITY = 8;
 // Адрес изображения
-var AUTHOR_AVATAR = ['01', '02', '03', '04', '05', '05', '05', '05'];
+var AUTHOR_AVATAR = [
+  '01',
+  '02',
+  '03',
+  '04',
+  '05',
+  '06',
+  '06',
+  '07'
+];
 //  Заголовок предложения
-var OFFER_TITLE = ['заголовок предложения1', 'заголовок предложения2', 'заголовок предложения3', 'заголовок предложения4', 'заголовок предложения5', 'заголовок предложения6', 'заголовок предложения7', 'заголовок предложения8'];
+var OFFER_TITLE = [
+  'заголовок предложения1',
+  'заголовок предложения2',
+  'заголовок предложения3',
+  'заголовок предложения4',
+  'заголовок предложения5',
+  'заголовок предложения6',
+  'заголовок предложения7',
+  'заголовок предложения8'
+];
 // Адрес предложения
-var OFFER_ADDRESS_X = ['600', '650', '625', '660', '640', '630', '610', '620'];
-var OFFER_ADDRESS_Y = ['300', '350', '325', '360', '340', '330', '310', '320'];
+var OFFER_ADDRESS_X = [
+  '600',
+  '650',
+  '625',
+  '660',
+  '640',
+  '630',
+  '610',
+  '620'
+];
+var OFFER_ADDRESS_Y = [
+  '300',
+  '350',
+  '325',
+  '360',
+  '340',
+  '330',
+  '310',
+  '320'
+];
 // Cтоимость
-var OFFER_PRICE = [1100, 2000, 3000, 4000, 5000, 6000, 7000, 8000];
+var OFFER_PRICE = [
+  1100,
+  2000,
+  3000,
+  4000,
+  5000,
+  6000,
+  7000,
+  8000
+];
 // Тип жилья
-var OFFER_TYPE = ['palace', 'flat', 'house', 'bungalo'];
+var OFFER_TYPE = [
+  'palace',
+  'flat',
+  'house',
+  'bungalo'
+];
 // Количество комнат
-var OFFER_ROOMS = [1, 2, 3, 4];
+var OFFER_ROOMS = [
+  1,
+  2,
+  3,
+  4
+];
 // Количество гостей, которое можно разместить
-var OFFER_GUESTS = [1, 2, 3, 4];
+var OFFER_GUESTS = [
+  1,
+  2,
+  3,
+  4
+];
 // Время заезда
-var OFFER_CHECKIN = ['12:00', '13:00', '14:00'];
+var OFFER_CHECKIN = [
+  '12:00',
+  '13:00',
+  '14:00'
+];
 // Время вызаезда
-var OFFER_CHECKOUT = ['12:00', '13:00', '14:00'];
+var OFFER_CHECKOUT = [
+  '12:00',
+  '13:00',
+  '14:00'
+];
 // Опции
-var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+var OFFER_FEATURES = [
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner'
+];
 // Описание
-var OFFER_DESCRIPTION = ['строка с описанием1', 'строка с описанием2', 'строка с описанием3'];
+var OFFER_DESCRIPTION = [
+  'строка с описанием1',
+  'строка с описанием2',
+  'строка с описанием3'
+];
 // Фотографии
-var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+var OFFER_PHOTOS = [
+  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
+];
 // Метки на карте
-var LOCATION_X = [100, 700, 300, 600, 500, 900];
-var LOCATION_Y = [230, 300, 450, 500, 350, 330];
+var LOCATION_X = [
+  100,
+  700,
+  300,
+  600,
+  500,
+  900
+];
+var LOCATION_Y = [
+  230,
+  300,
+  450,
+  500,
+  350,
+  330
+];
 
 
 // Переключаем карту из неактивного состояния в активное
