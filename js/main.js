@@ -7,14 +7,11 @@ var ADS_QUANTITY = 8;
 var AUTHOR_AVATAR = ['01', '02', '03', '04', '05', '05', '05', '05'];
 //  Заголовок предложения
 var OFFER_TITLE = [
-  'заголовок предложения1',
-  'заголовок предложения2',
-  'заголовок предложения3',
-  'заголовок предложения4',
-  'заголовок предложения5',
-  'заголовок предложения6',
-  'заголовок предложения7',
-  'заголовок предложения8'
+    'Уютное гнездышко для молодоженов',
+    'Уютная кваритира', 'Недалеко от центра',
+    'Можно с животными', 'Рядом с парком',
+    'Рядом с метро', 'Тут жил Пушкин',
+    'Для жителей спб бесплатно'
 ];
 // Адрес предложения
 var OFFER_ADDRESS_X = ['600', '650', '625', '660', '640', '630', '610', '620'];
@@ -34,17 +31,20 @@ var OFFER_CHECKOUT = ['12:00', '13:00', '14:00'];
 // Опции
 var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 // Описание
-var OFFER_DESCRIPTION = ['строка с описанием1', 'строка с описанием2', 'строка с описанием3'];
+var OFFER_DESCRIPTION = [
+    'Великолепная квартира-студия в центре Токио.',
+    'Домик на окраине Токио. Подходит студентам. Квартира не дорогая.',
+    'Квартира для семьи с детьми, рядом есть магазины, парк и много всего интересного.'
+];
 // Фотографии
 var OFFER_PHOTOS = [
-  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
+    'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+    'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+    'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
 // Метки на карте
 var LOCATION_X = [100, 700, 300, 600, 500, 900];
 var LOCATION_Y = [230, 300, 450, 500, 350, 330];
-
 
 // Переключаем карту из неактивного состояния в активное
 var mapRegime = document.querySelector('.map');
@@ -53,10 +53,18 @@ mapRegime.classList.remove('map--faded');
 
 // Находит элемент, в который мы будем вставлять похожие объявления
 var similarListElement = mapRegime.querySelector('.map__pins');
-// Находит шаблон, который мы будем копировать
+
+
+// Находит шаблон пинов, который мы будем копировать
 var similarPinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
+
+
+// Находит шаблон карточки, который мы будем копировать
+var similarCardTemplate = document.querySelector('#card')
+    .content
+    .querySelector('.map__card');
 
 
 /**
@@ -66,9 +74,21 @@ var similarPinTemplate = document.querySelector('#pin')
  *
  *@return возвращает случайное значение из массива.
  */
-var arrayRandElement = function (arr) {
-  var rand = Math.floor(Math.random() * arr.length);
-  return arr[rand];
+var getARandomElement = function(arr) {
+    var rand = Math.floor(Math.random() * arr.length);
+    return arr[rand];
+};
+
+// Возвращает минимальное и максимально значение в диапазоне
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+
+// Выбирает случайную длину массива
+var getRandomArray = function(arr) {
+    var randomElement = getRandomInt(0, arr.length);
+    return arr.slice(0, randomElement);
 };
 
 
@@ -80,38 +100,34 @@ var arrayRandElement = function (arr) {
  *
  *@return возвращает массивы.
  */
-var generationArray = function (quantity) {
-  var pins = [];
-  for (var i = 0; i < quantity; i++) {
-    pins.push({
-      author: {
-        avatar: 'img/avatars/' + 'user' + arrayRandElement(AUTHOR_AVATAR) + '.png'
-      },
-      offer: {
-        title: arrayRandElement(OFFER_TITLE),
-        address: arrayRandElement(OFFER_ADDRESS_X) + ',' + ' ' + arrayRandElement(OFFER_ADDRESS_Y),
-        price: arrayRandElement(OFFER_PRICE),
-        type: arrayRandElement(OFFER_TYPE),
-        rooms: arrayRandElement(OFFER_ROOMS),
-        guests: arrayRandElement(OFFER_GUESTS),
-        checkin: arrayRandElement(OFFER_CHECKIN),
-        checkout: arrayRandElement(OFFER_CHECKOUT),
-        features: arrayRandElement(OFFER_FEATURES),
-        description: arrayRandElement(OFFER_DESCRIPTION),
-        photos: arrayRandElement(OFFER_PHOTOS)
-      },
-     location: {
-       x: arrayRandElement(LOCATION_X),
-       y: arrayRandElement(LOCATION_Y)
-     }
-  });
-}
- return pins;
+var generationArray = function(quantity) {
+    var pins = [];
+    for (var i = 0; i < quantity; i++) {
+        pins.push({
+            author: {
+                avatar: 'img/avatars/' + 'user' + getARandomElement(AUTHOR_AVATAR) + '.png'
+            },
+            offer: {
+                title: getARandomElement(OFFER_TITLE),
+                address: getARandomElement(OFFER_ADDRESS_X) + ',' + ' ' + getARandomElement(OFFER_ADDRESS_Y),
+                price: getARandomElement(OFFER_PRICE),
+                type: getARandomElement(OFFER_TYPE),
+                rooms: getARandomElement(OFFER_ROOMS),
+                guests: getARandomElement(OFFER_GUESTS),
+                checkin: getARandomElement(OFFER_CHECKIN),
+                checkout: getARandomElement(OFFER_CHECKOUT),
+                features: getRandomArray(OFFER_FEATURES),
+                description: getARandomElement(OFFER_DESCRIPTION),
+                photos: getRandomArray(OFFER_PHOTOS)
+            },
+            location: {
+                x: getARandomElement(LOCATION_X),
+                y: getARandomElement(LOCATION_Y)
+            }
+        });
+    }
+    return pins;
 };
-
-
-// Создаем массивы.
-generationArray(ADS_QUANTITY);
 
 
 /**
@@ -122,32 +138,106 @@ generationArray(ADS_QUANTITY);
  *@return {object} возвращает объявление.
  */
 var renderPin = function(pin) {
-  var pinElement = similarPinTemplate.cloneNode(true);
+    var pinElement = similarPinTemplate.cloneNode(true);
 
-  pinElement.setAttribute('style', 'left: ' + pin.location.x + 'px; top: ' + pin.location.y + 'px;');
-  pinElement.querySelector('img').src = pin.author.avatar;
-  pinElement.querySelector('img').alt = pin.offer.title;
+    pinElement.setAttribute('style', 'left: ' + pin.location.x + 'px; top: ' + pin.location.y + 'px;');
+    pinElement.querySelector('img').src = pin.author.avatar;
+    pinElement.querySelector('img').alt = pin.offer.title;
 
-  return pinElement;
+    return pinElement;
+};
+
+
+// Массив типов жилья
+var offerTypeListMap = {
+    "flat": "Квартира",
+    "bungalo": "Бунгало",
+    "house": "Дом",
+    "palace": "Дворец",
 };
 
 
 /**
-*Добавляет шаблон в документ
-*
-*@param  {array} array массив с данными.
-*
-*@return возвращает объявление.
-*/
-var addTemplate = function(array) {
-  var fragment = document.createDocumentFragment();
-  for (var j = 0; j < array.length; j++) {
-      fragment.appendChild(renderPin(array[j]));
-  }
-  return fragment;
+ *Отрисовывает шаблон в докумен
+ *
+ *@param {array} pin Массив с данными.
+ * 
+ *@return {object} cardFeatures возвращает все доступные удобства в объявлении.
+ */
+var renderFeatures = function(cardFeatures, pin) {
+    var popupFeaturesContainer = cardFeatures.querySelector('.popup__features');
+
+    popupFeaturesContainer.innerHTML = '';
+    pin.offer.features.forEach(function(item) {
+        var element = document.createElement('li');
+        element.classList.add('popup__feature', 'popup__feature--' + item);
+        popupFeaturesContainer.appendChild(element);
+    });
+
+    return cardFeatures;
 };
 
 
-similarListElement.appendChild(addTemplate(generationArray(ADS_QUANTITY)));
+/**
+ *Отрисовывает шаблон в докумен
+ *
+ *@param {array} pin Массив с данными.
+ * 
+ *@return {object} photoElement возвращает фотографии.
+ */
+var renderPhoto = function(photoElement, pin) {
+    photoElement.querySelector('.popup__photos').innerHTML = '';
+    pin.offer.photos.forEach(function(item) {
+        var element = document.createElement('img');
+        element.classList.add('popup__photo');
+        element.src = item;
+        element.width = 45;
+        element.height = 40;
+        element.alt = 'Фотография квартиры'
+        photoElement.querySelector('.popup__photos').appendChild(element);
+    });
+
+    return photoElement;
+};
+
+
+/**
+ *Отрисовывает шаблон в документ
+ *
+ *@param  {object} pin массив с данными карточки.
+ *
+ *@return {object} возвращает карточки.
+ */
+var renderCard = function(cardElement, pin) {
+    cardElement.querySelector('.popup__title').textContent = pin.offer.title;
+    cardElement.querySelector('.popup__text--address').textContent = pin.offer.address;
+    cardElement.querySelector('.popup__text--price').textContent = pin.offer.price + '₽/ночь';
+    cardElement.querySelector('.popup__type').textContent = offerTypeListMap[pin.offer.type];
+    cardElement.querySelector('.popup__text--capacity').textContent = pin.offer.rooms + ' комнаты для ' + pin.offer.guests + ' гостей';
+    cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + pin.offer.checkin + ', выезд до ' + pin.offer.checkout;
+    cardElement.querySelector('.popup__description').textContent = pin.offer.description;
+    cardElement.querySelector('.popup__avatar').setAttribute('src', pin.author.avatar);
+    return cardElement;
+};
+
+
+var pinsData = generationArray(ADS_QUANTITY);
+
+
+var addItem = function(renderer, data) {
+    return renderer(data);
+}
+
+
+// Добавляет элемент в шаблон
+for (var i = 0; i < pinsData.length; i++) {
+    similarListElement.appendChild(addItem(renderPin, pinsData[i]));
+
+    var cardElement = similarCardTemplate.cloneNode(true);
+    similarListElement.appendChild(renderCard(cardElement, pinsData[i]));
+    similarListElement.appendChild(renderFeatures(cardElement, pinsData[i]));
+    similarListElement.appendChild(renderPhoto(cardElement, pinsData[i]));
+}
+
 
 mapRegime.querySelector('.map__pins').classList.remove('map--faded');
