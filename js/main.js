@@ -135,7 +135,7 @@ var generationArray = function (quantity) {
 /**
  *Отрисовывает шаблон в документ
  *
- *@param  {object} pin массив с данными объявлений.
+ *@param {object} pin массив с данными объявлений.
  *
  *@return {object} возвращает объявление.
  */
@@ -150,7 +150,7 @@ var renderPin = function (pin) {
 };
 
 
-// Массив типов жилья
+// Объект типов жилья
 var offerTypeListMap = {
   'flat': 'Квартира',
   'bungalo': 'Бунгало',
@@ -162,7 +162,7 @@ var offerTypeListMap = {
 /**
  *Отрисовывает шаблон в докумен
  *
-*@param  {object} pin массив с данными объявлений.
+ *@param {object} pin массив с данными объявлений.
  *
  *@return {object} featuresElement возвращает все доступные удобства в объявлении.
  */
