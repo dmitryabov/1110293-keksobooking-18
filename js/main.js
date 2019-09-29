@@ -1,3 +1,4 @@
+/* eslint-disable valid-jsdoc */
 'use strict';
 
 
@@ -224,7 +225,6 @@ var renderPhoto = function (photoElement, pin) {
 /**
  *Отрисовывает шаблон в документ
  *
- // eslint-disable-next-line valid-jsdoc
  *@param  {string} pin массив с данными карточки.
  *
  *@return {object} cardElement возвращает карточки.
