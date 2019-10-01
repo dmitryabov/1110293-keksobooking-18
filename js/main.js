@@ -2,6 +2,7 @@
 'use strict';
 
 
+var ENTER_KEYCODE = 13;
 // Количество объявлений
 var ADS_QUANTITY = 8;
 // Адрес изображения
@@ -47,9 +48,27 @@ var OFFER_PHOTOS = [
 var LOCATION_X = [100, 700, 300, 600, 500, 900];
 var LOCATION_Y = [230, 300, 450, 500, 350, 330];
 
+
+// Добавляет атрибут disabled в форму
+function abFormDisablet() {
+  var abForm = document.querySelector('.ad-form');
+  var child = abForm.querySelectorAll('fieldset');
+
+  function addDisabledAtt(array) {
+    array.forEach(function (element) {
+      element.setAttribute('disabled', '');
+
+    });
+  }
+  addDisabledAtt(child);
+}
+
+abFormDisablet();
+
+
 // Переключаем карту из неактивного состояния в активное
 var mapRegime = document.querySelector('.map');
-mapRegime.classList.remove('map--faded');
+// mapRegime.classList.remove('map--faded');
 
 
 // Находит элемент, в который мы будем вставлять похожие объявления
@@ -206,7 +225,6 @@ var renderPhoto = function (photoElement, pin) {
 /**
  *Отрисовывает шаблон в документ
  *
- // eslint-disable-next-line valid-jsdoc
  *@param  {string} pin массив с данными карточки.
  *
  *@return {object} cardElement возвращает карточки.
@@ -243,4 +261,76 @@ for (var i = 0; i < pinsData.length; i++) {
 }
 
 
-mapRegime.querySelector('.map__pins').classList.remove('map--faded');
+var mapPinControl = similarListElement.querySelector('.map__pin--main');
+
+
+// Алгоритм активации окна
+var onPinControlMousedown = function () {
+  mapRegime.classList.remove('map--faded');
+  var abForm = document.querySelector('.ad-form');
+  abForm.classList.remove('ad-form--disabled');
+
+  function abFormAblet() {
+    var abFormS = document.querySelector('.ad-form');
+    var childS = abFormS.querySelectorAll('fieldset');
+
+    function removeDisabledAtt(array) {
+      array.forEach(function (element) {
+        element.removeAttribute('disabled');
+
+      });
+    }
+    removeDisabledAtt(childS);
+  }
+
+  abFormAblet();
+};
+
+
+// Обработчик активации окна
+mapPinControl.addEventListener('mousedown', function () {
+  onPinControlMousedown();
+});
+
+
+// Обработчик активации окна по нажатию на Enter
+mapPinControl.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    onPinControlMousedown();
+  }
+});
+
+
+// Алгоритм почучения координат
+var ordinataPin = function (paramX, paramY) {
+  var testParam = document.querySelector('#address');
+  testParam.setAttribute('value', paramX + ', ' + paramY);
+};
+
+mapPinControl.addEventListener('mousedown', function (evt) {
+  ordinataPin(evt.pageX, evt.pageY);
+});
+
+
+// Обработчик вывода сообщения о валидации
+var onSelectlСhange = function () {
+  var capacityPattern = {
+    1: ['1'],
+    2: ['1', '2'],
+    3: ['1', '2', '3'],
+    100: ['0']
+  };
+
+  var roomSelect = document.querySelector('#room_number');
+  var capacitySelect = document.querySelector('#capacity');
+  var guestCapacity = capacitySelect.querySelector('option:checked');
+  var roomCapacity = capacityPattern[roomSelect.querySelector('option:checked').value];
+  var errorMessage = roomCapacity.includes(guestCapacity.value) ? '' : 'Колличество комнат не подходит ' + guestCapacity.textContent;
+  capacitySelect.setCustomValidity(errorMessage);
+};
+
+
+// Алгоритм вывода сообщения о валидации
+document.querySelector('#capacity').addEventListener('change', function () {
+  onSelectlСhange();
+});
