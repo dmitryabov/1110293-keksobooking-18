@@ -2,7 +2,6 @@
 
 
 (function () {
-
   // Адрес изображения
   var AUTHOR_AVATAR = ['01', '02', '03', '04', '05', '05', '05', '05'];
   //  Заголовок предложения
@@ -47,18 +46,12 @@
   var LOCATION_Y = [230, 300, 450, 500, 350, 330];
 
 
-  // eslint-disable-next-line valid-jsdoc
-  /**
-*Выбирает случайное значение из массива
-*
-*@param {array} arr Массив с данными.
-*
-*@return возвращает случайное значение из массива.
-*/
+  // Выбирает случайное значение из массива
   var getARandomElement = function (arr) {
     var rand = Math.floor(Math.random() * arr.length);
     return arr[rand];
   };
+
 
   // Возвращает минимальное и максимально значение в диапазоне
   function getRandomInt(min, max) {
@@ -73,14 +66,7 @@
   };
 
 
-  // eslint-disable-next-line valid-jsdoc
-  /**
- *Создает массив случайно сгенерированных объявлений.
- *
- *@param  {int} quantity колличество массивов.
- *
- *@return возвращает массивы.
- */
+  // Создает массив случайно сгенерированных объявлений.
   window.data = function (quantity) {
     var pins = [];
     for (var i = 0; i < quantity; i++) {
