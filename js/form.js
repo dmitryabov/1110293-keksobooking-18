@@ -3,7 +3,7 @@
 
 (function () {
 // Обработчик вывода сообщения о валидации
-  var onSelectlСhange = function () {
+  var onSelectСhange = function () {
     var capacityPattern = {
       1: ['1'],
       2: ['1', '2'],
@@ -22,6 +22,6 @@
 
   // Алгоритм вывода сообщения о валидации
   document.querySelector('#capacity').addEventListener('change', function () {
-    onSelectlСhange();
+    onSelectСhange();
   });
 })();

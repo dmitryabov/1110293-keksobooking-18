@@ -36,7 +36,7 @@
   var pinsData = window.data(ADS_QUANTITY);
 
 
-  // Добавляет элемент в шаблон
+  // Добавляет готовый шаблон в документ
   window.pin = function () {
     pinsData.forEach(function (pin) {
       similarListElement.appendChild(addItem(renderPin, pin));

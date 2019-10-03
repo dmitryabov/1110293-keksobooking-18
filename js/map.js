@@ -10,19 +10,19 @@ var map = document.querySelector('.map');
 
 
 // Добавляет атрибут disabled в форму
-function adFormDisablet() {
+function adFormDisabled() {
   var child = adForm.querySelectorAll('fieldset');
 
-  function addDisabledAtt(array) {
+  function addDisabledAttribute(array) {
     array.forEach(function (element) {
       element.setAttribute('disabled', '');
 
     });
   }
-  addDisabledAtt(child);
+  addDisabledAttribute(child);
 }
 
-adFormDisablet();
+adFormDisabled();
 
 
 // Находит элемент, в который мы будем вставлять похожие объявления
@@ -33,7 +33,7 @@ var mapPinControl = similarListElement.querySelector('.map__pin--main');
 
 
 // Алгоритм активации окна
-var onPinControlClick = function () {
+var handlePinControlClick = function () {
   map.classList.remove('map--faded');
   adForm.classList.remove('ad-form--disabled');
 
@@ -46,7 +46,7 @@ var onPinControlClick = function () {
 
 // Обработчик активации окна
 mapPinControl.addEventListener('click', function () {
-  onPinControlClick();
+  handlePinControlClick();
   window.pin();
   window.card();
 });
@@ -55,7 +55,7 @@ mapPinControl.addEventListener('click', function () {
 // Обработчик активации окна по нажатию на Enter
 mapPinControl.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    onPinControlClick();
+    handlePinControlClick();
     window.pin();
     window.card();
   }
@@ -64,8 +64,8 @@ mapPinControl.addEventListener('keydown', function (evt) {
 
 // Алгоритм почучения координат
 var ordinataPin = function (paramX, paramY) {
-  var testParam = document.querySelector('#address');
-  testParam.setAttribute('value', paramX + ', ' + paramY);
+  var addressField = document.querySelector('#address');
+  addressField.setAttribute('value', paramX + ', ' + paramY);
 };
 
 
