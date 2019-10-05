@@ -2,7 +2,6 @@
 
 
 (function () {
-  var ADS_QUANTITY = 8;
   var map = document.querySelector('.map');
 
 
@@ -33,7 +32,7 @@
   };
 
 
-  var pinsData = window.data(ADS_QUANTITY);
+  var pinsData = window.data.generateRandomOffers(window.data.ADS_QUANTITY);
 
 
   // Добавляет готовый шаблон в документ

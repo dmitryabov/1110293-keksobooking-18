@@ -2,6 +2,14 @@
 
 
 (function () {
+  var ADS_QUANTITY = 8;
+  // Объект типов жилья
+  var offerTypeListMap = {
+    'flat': 'Квартира',
+    'bungalo': 'Бунгало',
+    'house': 'Дом',
+    'palace': 'Дворец'
+  };
   // Адрес изображения
   var AUTHOR_AVATAR = ['01', '02', '03', '04', '05', '05', '05', '05'];
   //  Заголовок предложения
@@ -67,7 +75,7 @@
 
 
   // Создает массив случайно сгенерированных объявлений.
-  window.data = function (quantity) {
+  var generateRandomOffers = function (quantity) {
     var pins = [];
     for (var i = 0; i < quantity; i++) {
       pins.push({
@@ -94,6 +102,13 @@
       });
     }
     return pins;
+  };
+
+
+  window.data = {
+    generateRandomOffers: generateRandomOffers,
+    ADS_QUANTITY: ADS_QUANTITY,
+    offerTypeListMap: offerTypeListMap
   };
 
 })();

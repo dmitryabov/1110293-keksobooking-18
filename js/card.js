@@ -2,8 +2,6 @@
 
 
 (function () {
-// Количество объявлений
-  var ADS_QUANTITY = 8;
   var map = document.querySelector('.map');
   // Находит элемент, в который мы будем вставлять похожие объявления
   var similarListElement = map.querySelector('.map__pins');
@@ -13,15 +11,6 @@
   var similarCardTemplate = document.querySelector('#card')
     .content
     .querySelector('.map__card');
-
-
-  // Объект типов жилья
-  var offerTypeListMap = {
-    'flat': 'Квартира',
-    'bungalo': 'Бунгало',
-    'house': 'Дом',
-    'palace': 'Дворец'
-  };
 
 
   // Отрисовывает шаблон features в докумен
@@ -61,7 +50,7 @@
     cardElement.querySelector('.popup__title').textContent = pin.offer.title;
     cardElement.querySelector('.popup__text--address').textContent = pin.offer.address;
     cardElement.querySelector('.popup__text--price').textContent = pin.offer.price + '₽/ночь';
-    cardElement.querySelector('.popup__type').textContent = offerTypeListMap[pin.offer.type];
+    cardElement.querySelector('.popup__type').textContent = window.data.offerTypeListMap[pin.offer.type];
     cardElement.querySelector('.popup__text--capacity').textContent = pin.offer.rooms + ' комнаты для ' + pin.offer.guests + ' гостей';
     cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + pin.offer.checkin + ', выезд до ' + pin.offer.checkout;
     cardElement.querySelector('.popup__description').textContent = pin.offer.description;
@@ -70,7 +59,7 @@
   };
 
 
-  var pinsData = window.data(ADS_QUANTITY);
+  var pinsData = window.data.generateRandomOffers(window.data.ADS_QUANTITY);
 
 
   // Добавляет карточку в шаблон
