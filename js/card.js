@@ -59,11 +59,8 @@
   };
 
 
-  var pinsData = window.data.generateRandomOffers(window.data.ADS_QUANTITY);
-
-
   // Добавляет карточку в шаблон
-  window.card = function () {
+  window.addCardToTimplate = function (pinsData) {
     pinsData.forEach(function (pin) {
       var cardElement = similarCardTemplate.cloneNode(true);
       similarListElement.appendChild(renderCard(cardElement, pin));
