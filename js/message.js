@@ -17,5 +17,6 @@
   window.errorMessage = function () {
     map.appendChild(errorElement);
     errorElement.classList.remove('visually-hidden');
-  }
+  };
+
 })();

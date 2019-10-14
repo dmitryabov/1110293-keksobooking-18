@@ -161,6 +161,4 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-
-
 })();
