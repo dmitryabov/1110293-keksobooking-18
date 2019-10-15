@@ -21,6 +21,7 @@
 
 
   // Отрисовывает шаблон в документ
+
   var renderPin = function (pin) {
     var pinElement = similarPinTemplate.cloneNode(true);
 
@@ -32,11 +33,8 @@
   };
 
 
-  var pinsData = window.data.generateRandomOffers(window.data.ADS_QUANTITY);
-
-
   // Добавляет готовый шаблон в документ
-  window.pin = function () {
+  window.addPinToTimplate = function (pinsData) {
     pinsData.forEach(function (pin) {
       similarListElement.appendChild(addItem(renderPin, pin));
     });

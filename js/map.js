@@ -148,6 +148,13 @@
           mapPinControl.removeEventListener('click', onClickPreventDefault);
         };
         mapPinControl.addEventListener('click', onClickPreventDefault);
+        window.load('https://js.dump.academy/keksobooking/data',
+            function (offers) {
+              window.addPinToTimplate(offers);
+              window.addCardToTimplate(offers);
+            },
+            window.showErrorMessage);
+
       }
 
     };
@@ -158,4 +165,5 @@
     // Обработчик события отпускания кнопки мыши
     document.addEventListener('mouseup', onMouseUp);
   });
+
 })();
