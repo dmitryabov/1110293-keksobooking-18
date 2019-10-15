@@ -148,8 +148,13 @@
           mapPinControl.removeEventListener('click', onClickPreventDefault);
         };
         mapPinControl.addEventListener('click', onClickPreventDefault);
-        window.load('https://js.dump.academy/keksobooking/data', window.addPinToTimplate, window.errorMessage);
-        window.load('https://js.dump.academy/keksobooking/data', window.addCardToTimplate, window.errorMessage);
+        window.load('https://js.dump.academy/keksobooking/data',
+            function (offers) {
+              window.addPinToTimplate(offers);
+              window.addCardToTimplate(offers);
+            },
+            window.showErrorMessage);
+
       }
 
     };

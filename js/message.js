@@ -14,7 +14,7 @@
   errorElement.classList.add('visually-hidden');
 
 
-  window.errorMessage = function () {
+  window.showErrorMessage = function () {
     map.appendChild(errorElement);
     errorElement.classList.remove('visually-hidden');
   };
