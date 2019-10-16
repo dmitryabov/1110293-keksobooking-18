@@ -24,7 +24,7 @@
 
 
   // Добавляет атрибут disabled в форму
-  function adFormDisabled() {
+  window.adFormDisabled = function () {
     var child = adForm.querySelectorAll('fieldset');
 
     function addDisabledAttribute(array) {
@@ -34,9 +34,9 @@
       });
     }
     addDisabledAttribute(child);
-  }
+  };
 
-  adFormDisabled();
+  window.adFormDisabled();
 
 
   var mapPinsContainer = map.querySelector('.map__pins');

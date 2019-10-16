@@ -1,42 +1,32 @@
 'use strict';
 
-
 (function () {
-  var map = document.querySelector('.map');
 
+  // Размеры метки меток
+  var SIZE_PIN_WIDTH = 50;
+  var SIZE_PIN_HEIGHT = 70;
 
-  // Находит шаблон пинов, который мы будем копировать
-  var similarPinTemplate = document.querySelector('#pin')
+  // Функция создания пина
+  function сreatePin(ad) {
+    // Путь к шаблону пина
+    var pinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
 
+    var clonedPin = pinTemplate.cloneNode(true);
+    var clonedPinStyle = clonedPin.style;
 
-  var addItem = function (renderer, data) {
-    return renderer(data);
-  };
+    clonedPinStyle.left = ad.location.x - (SIZE_PIN_WIDTH / 2) + 'px';
+    clonedPinStyle.top = ad.location.y - SIZE_PIN_HEIGHT + 'px';
+    clonedPin.id = ad.id;
+    clonedPin.querySelector('img').src = ad.author.avatar;
+    clonedPin.querySelector('img').alt = ad.offer.title;
 
+    return clonedPin;
+  }
 
-  // Находит элемент, в который мы будем вставлять похожие объявления
-  var similarListElement = map.querySelector('.map__pins');
-
-
-  // Отрисовывает шаблон в документ
-
-  var renderPin = function (pin) {
-    var pinElement = similarPinTemplate.cloneNode(true);
-
-    pinElement.setAttribute('style', 'left: ' + pin.location.x + 'px; top: ' + pin.location.y + 'px;');
-    pinElement.querySelector('img').src = pin.author.avatar;
-    pinElement.querySelector('img').alt = pin.offer.title;
-
-    return pinElement;
-  };
-
-
-  // Добавляет готовый шаблон в документ
-  window.addPinToTimplate = function (pinsData) {
-    pinsData.forEach(function (pin) {
-      similarListElement.appendChild(addItem(renderPin, pin));
-    });
+  // Экспорт
+  window.pin = {
+    сreate: сreatePin
   };
 })();
