@@ -49,7 +49,7 @@
     y: mapPinControl.offsetTop
   };
 
-  // Алгоритм активации окна
+  // Алгоритм активации
   var handlePinControlClick = function () {
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
