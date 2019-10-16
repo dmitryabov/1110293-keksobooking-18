@@ -1,169 +1,64 @@
 'use strict';
 
-
+// Модуль управления картой
 (function () {
-  var ENTER_KEYCODE = 13;
-  var Y_MIN = 150;
-  var Y_MAX = 500;
-  var X_MIN = 0;
-  var X_MAX = 1150;
+  var mapElement = document.querySelector('.map');
+  var mapPinListElement = mapElement.querySelector('.map__pins');
 
-
-  var PinSizes = {
-    WIDTH: 62,
-    HEIGHT: 62,
-    ARROW_HEIGHT: 18
+  // Метод перевода карты в неактивное состояние
+  var disablePage = function () {
+    mapElement.classList.add('map--faded');
   };
 
+  // Метод перевода карты в активное состояние
+  var enablePage = function () {
+    mapElement.classList.remove('map--faded');
+  };
 
-  var pinOffset = PinSizes.HEIGHT / 2 + PinSizes.ARROW_HEIGHT;
+  // Метод добавления элементов на карту
+  // Массив добавляемых элементов записывается в пустой массив для простоты удаления элементов с карты
+  var mapListElemnts = [];
+  // Если добавляется один элемент, то он записывается в переменную
+  var mapItemElement = null;
 
+  var insertElement = function (data, render) {
+    var nodeElement = null;
 
-  var adForm = document.querySelector('.ad-form');
-  var map = document.querySelector('.map');
-
-
-  // Добавляет атрибут disabled в форму
-  window.adFormDisabled = function () {
-    var child = adForm.querySelectorAll('fieldset');
-
-    function addDisabledAttribute(array) {
-      array.forEach(function (element) {
-        element.setAttribute('disabled', '');
-
+    if (Array.isArray(data)) {
+      var fragmentElement = document.createDocumentFragment();
+      data.forEach(function (item) {
+        nodeElement = render(item);
+        fragmentElement.appendChild(nodeElement);
+        mapListElemnts.push(nodeElement);
       });
+      mapPinListElement.appendChild(fragmentElement);
+    } else {
+      nodeElement = render(data);
+      mapItemElement = nodeElement;
+      mapPinListElement.insertAdjacentElement('afterend', nodeElement);
     }
-    addDisabledAttribute(child);
   };
 
-  window.adFormDisabled();
-
-
-  var mapPinsContainer = map.querySelector('.map__pins');
-
-
-  var mapPinControl = mapPinsContainer.querySelector('.map__pin--main');
-
-  var pinCoords = {
-    x: mapPinControl.offsetLeft,
-    y: mapPinControl.offsetTop
-  };
-
-  // Алгоритм активации окна
-  var handlePinControlClick = function () {
-    map.classList.remove('map--faded');
-    adForm.classList.remove('ad-form--disabled');
-
-    var childFormList = adForm.querySelectorAll('fieldset');
-    childFormList.forEach(function (element) {
-      element.removeAttribute('disabled');
+  //  Метод удаления элементов с карты
+  var removeElement = function (callBackRemove) {
+    mapListElemnts.forEach(function (item) {
+      item.remove();
     });
-  };
+    mapListElemnts = [];
 
-
-  // Обработчик активации окна
-  mapPinControl.addEventListener('click', function () {
-    handlePinControlClick();
-    window.pin();
-    window.card();
-  });
-
-
-  // Обработчик активации окна по нажатию на Enter
-  mapPinControl.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      handlePinControlClick();
-      window.pin();
-      window.card();
+    if (mapItemElement) {
+      mapItemElement.remove();
+      mapItemElement = null;
     }
-  });
-
-
-  var fillAddressField = function (paramX, paramY) {
-    var addressField = document.querySelector('#address');
-    addressField.setAttribute('value', paramX + ', ' + paramY);
+    if (callBackRemove) {
+      callBackRemove();
+    }
   };
 
-
-  mapPinControl.addEventListener('click', function (evt) {
-    fillAddressField(evt.pageX, evt.pageY);
-  });
-
-  // Событие начала перетаскивания окна
-  mapPinControl.addEventListener('mousedown', function (evt) {
-    evt.preventDefault();
-    // Запомним координаты точки, с которой мы начали перемещать окно
-    var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY
-    };
-
-    pinCoords = {
-      x: mapPinControl.offsetLeft,
-      y: mapPinControl.offsetTop
-    };
-
-    var dragged = false;
-
-    var onMouseMove = function (moveEvt) {
-      moveEvt.preventDefault();
-      dragged = true;
-
-      var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY
-      };
-
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-      };
-
-      pinCoords.x = mapPinControl.offsetLeft - shift.x;
-      pinCoords.y = mapPinControl.offsetTop - shift.y;
-
-
-      if ((pinCoords.y + pinOffset < Y_MIN) || (pinCoords.y + pinOffset > Y_MAX)) {
-        pinCoords.y = mapPinControl.offsetTop;
-      }
-      if ((pinCoords.x < X_MIN) || (pinCoords.x > X_MAX)) {
-        pinCoords.x = mapPinControl.offsetLeft;
-      }
-
-
-      mapPinControl.style.left = pinCoords.x + 'px';
-      mapPinControl.style.top = pinCoords.y + 'px';
-    };
-
-
-    var onMouseUp = function (upEvt) {
-      upEvt.preventDefault();
-
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-
-      if (dragged) {
-        var onClickPreventDefault = function (dragEvt) {
-          dragEvt.preventDefault();
-          mapPinControl.removeEventListener('click', onClickPreventDefault);
-        };
-        mapPinControl.addEventListener('click', onClickPreventDefault);
-        window.load('https://js.dump.academy/keksobooking/data',
-            function (offers) {
-              window.addPinToTimplate(offers);
-              window.addCardToTimplate(offers);
-            },
-            window.showErrorMessage);
-
-      }
-
-    };
-
-
-    // Обработчик события передвижения мыши
-    document.addEventListener('mousemove', onMouseMove);
-    // Обработчик события отпускания кнопки мыши
-    document.addEventListener('mouseup', onMouseUp);
-  });
-
+  window.map = {
+    disable: disablePage,
+    enable: enablePage,
+    clear: removeElement,
+    insert: insertElement,
+  };
 })();
