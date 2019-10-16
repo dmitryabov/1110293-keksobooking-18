@@ -2,7 +2,7 @@
 
 (function () {
 
-  // Размеры метки меток на карте
+  // Размеры метки меток
   var SIZE_PIN_WIDTH = 50;
   var SIZE_PIN_HEIGHT = 70;
 
