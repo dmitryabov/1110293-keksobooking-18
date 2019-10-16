@@ -1,29 +1,25 @@
 'use strict';
 
+// Модуль взаимодействия с сервером
 (function () {
+  var CODE_SUCCESS = 200;
+  var ONE_SECOND = 1000;
+  var TIMEOUT = 10000;
+  var Url = {
+    GET: 'https://js.dump.academy/keksobooking/data',
+    POST: 'https://js.dump.academy/keksobooking'
+  };
 
-  // Адрес для отправки форму на сервер
-  var SEND_URL = 'https://js.dump.academy/keksobooking';
-
-  // Адрес для загрузки данных с сервера
-  var LOAD_URL = 'https://js.dump.academy/keksobooking/data';
-
-  // Номер успешной загрузки, отправки на сервер
-  var SUCCESS_CODE = 200;
-
-  // Время ожидания от сервера миллисекундах
-  var LIMIT_TIMEOUT = 10000;
-
-  // Функция создания запроса к серверу
-  function createRequest(onLoad, onError) {
+  // Метод получения данных
+  var toRequest = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === SUCCESS_CODE) {
-        onLoad(xhr.response);
+      if (xhr.status === CODE_SUCCESS) {
+        onSuccess(xhr.response);
       } else {
-        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+        onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
     });
 
@@ -32,35 +28,24 @@
     });
 
     xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+      onError('Запрос не успел выполниться за ' + xhr.timeout / ONE_SECOND + ' секунд');
     });
 
-    xhr.timeout = LIMIT_TIMEOUT; // 10s
+    xhr.timeout = TIMEOUT;
 
     return xhr;
-  }
-
-  // Функция отправки запроса с данными формы на сервер
-  function sendBackend(data, onLoad, onError) {
-    var xhr = createRequest(onLoad, onError);
-
-    xhr.open('POST', SEND_URL);
-    // data - отправка данных формы на сервер
-    xhr.send(data);
-  }
-
-  // Функция получения(загрузки) данных (массива с объектами) с сервера
-  function loadBackend(onLoad, onError) {
-    var xhr = createRequest(onLoad, onError);
-
-    xhr.open('GET', LOAD_URL);
-    xhr.send();
-  }
-
-  // Экспорт
-  window.backend = {
-    send: sendBackend,
-    load: loadBackend
   };
 
+  window.backend = {
+    download: function (onSuccess, onError) {
+      var xhr = toRequest(onSuccess, onError);
+      xhr.open('GET', Url.GET);
+      xhr.send();
+    },
+    upload: function (data, onSuccess, onError) {
+      var xhr = toRequest(onSuccess, onError);
+      xhr.open('POST', Url.POST);
+      xhr.send(data);
+    }
+  };
 })();
