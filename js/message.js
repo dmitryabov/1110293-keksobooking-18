@@ -1,4 +1,6 @@
 'use strict';
+
+
 (function () {
   // Main на странице сайта
   var siteMain = document.querySelector('main');

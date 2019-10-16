@@ -20,9 +20,6 @@
   };
 
 
-  // Callback переменная дезактивации страницы
-  var successSubmitCallback = null;
-
   // Алгоритм вывода сообщения о валидации
   document.querySelector('#capacity').addEventListener('change', function () {
     onSelectСhange();
@@ -42,12 +39,9 @@
   };
 
 
-  // (Handler) Функция отправки данных на сервер
-  function onFormAdSubmit(evt) {
-    window.backend.send(new FormData(formAd), function () {
-      successSubmitCallback();
-    };
+  var form = document.querySelector('.ad-form');
+  form.addEventListener('submit', function (evt) {
+    window.upload('https://js.dump.academy/keksobooking', new FormData(form), errorHandler);
     evt.preventDefault();
-  }
-
+  });
 })();
