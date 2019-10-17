@@ -26,6 +26,22 @@
   });
 
 
+  var adForm = document.querySelector('.ad-form');
+
+  // Добавляет атрибут disabled в форму
+  window.formDisabled = function adFormDisabled() {
+    var child = adForm.querySelectorAll('fieldset');
+
+    function addDisabledAttribute(array) {
+      array.forEach(function (element) {
+        element.setAttribute('disabled', '');
+
+      });
+    }
+    addDisabledAttribute(child);
+  };
+
+
   var errorHandler = function (errorMessage) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
@@ -39,9 +55,13 @@
   };
 
 
+  var onSuccess = function () {
+    window.formDisabled();
+  };
+
   var form = document.querySelector('.ad-form');
   form.addEventListener('submit', function (evt) {
-    window.upload('https://js.dump.academy/keksobooking', new FormData(form), window.formDisabled);
+    window.upload('https://js.dump.academy/keksobooking', new FormData(form), onSuccess);
     evt.preventDefault();
   });
 })();

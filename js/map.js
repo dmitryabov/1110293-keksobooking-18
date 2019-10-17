@@ -22,22 +22,6 @@
   var map = document.querySelector('.map');
 
 
-  // Добавляет атрибут disabled в форму
-  window.formDisabled = function adFormDisabled() {
-    var child = adForm.querySelectorAll('fieldset');
-
-    function addDisabledAttribute(array) {
-      array.forEach(function (element) {
-        element.setAttribute('disabled', '');
-
-      });
-    }
-    addDisabledAttribute(child);
-  };
-
-  window.formDisabled();
-
-
   var mapPinsContainer = map.querySelector('.map__pins');
 
 
