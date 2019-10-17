@@ -2,7 +2,6 @@
 
 
 (function () {
-  var ENTER_KEYCODE = 13;
   var Y_MIN = 150;
   var Y_MAX = 500;
   var X_MIN = 0;
@@ -70,6 +69,7 @@
   mapPinControl.addEventListener('click', function (evt) {
     fillAddressField(evt.pageX, evt.pageY);
   });
+
 
   // Событие начала перетаскивания окна
   mapPinControl.addEventListener('mousedown', function (evt) {
