@@ -27,9 +27,10 @@
   };
 
   window.removeAllPins = function () {
-    document.querySelectorAll('.map__pins').innerHTML = '';
+    map.querySelectorAll('.map__pin:not(.map__pin--main)').forEach(function (element) {
+      element.remove();
+    });
   };
-
 
   // Добавляет готовый шаблон в документ
   window.addPinToTimplate = function (pinsData) {

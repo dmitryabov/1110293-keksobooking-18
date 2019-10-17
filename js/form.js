@@ -65,7 +65,7 @@
 
   var form = document.querySelector('.ad-form');
   form.addEventListener('submit', function (evt) {
-    window.upload('https://js.dump.academy/keksobooking', new FormData(form), onSuccess);
+    window.upload('https://js.dump.academy/keksobooking', new FormData(form), onSuccess, errorHandler);
     evt.preventDefault();
   });
 })();

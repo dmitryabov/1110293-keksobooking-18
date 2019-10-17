@@ -62,7 +62,7 @@
 
 
   window.removeCard = function () {
-    document.querySelector('.map__card').innerHTML = '';
+    similarListElement.removeChild(similarListElement.querySelector('article'));
   };
 
 
