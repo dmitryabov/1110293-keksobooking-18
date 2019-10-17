@@ -64,6 +64,11 @@
   });
 
 
+  mapPinControl.addEventListener('click', function (evt) {
+    fillAddressField(evt.pageX, evt.pageY);
+  });
+
+
   // Событие начала перетаскивания окна
   mapPinControl.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -126,7 +131,6 @@
         window.load('https://js.dump.academy/keksobooking/data',
             function (offers) {
               window.addPinToTimplate(offers);
-              window.addCardToTimplate(offers);
               handlePinControlClick();
             },
             window.showErrorMessage);

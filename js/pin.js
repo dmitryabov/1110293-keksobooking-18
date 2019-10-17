@@ -35,7 +35,13 @@
   // Добавляет готовый шаблон в документ
   window.addPinToTimplate = function (pinsData) {
     pinsData.forEach(function (pin) {
-      similarListElement.appendChild(addItem(renderPin, pin));
+      var pinElement = renderPin(pin);
+
+      similarListElement.appendChild(pinElement);
+
+      pinElement.addEventListener('click', function () {
+        window.addCardToTimplate(pinsData);
+      });
     });
   };
 })();
