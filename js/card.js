@@ -30,6 +30,15 @@
   };
 
 
+  var closeCard = similarCardTemplate.querySelector('.popup__close');
+
+  window.closeMapCard = function () {
+    closeCard.addEventListener('click', function () {
+      window.removeCard();
+    });
+  };
+
+
   // Отрисовывает шаблон фотографий в докумен
   var renderPhoto = function (photoElement, card) {
     photoElement.querySelector('.popup__photos').innerHTML = '';
@@ -73,4 +82,5 @@
     similarListElement.appendChild(renderFeatures(cardElement, card));
     similarListElement.appendChild(renderPhoto(cardElement, card));
   };
+
 })();

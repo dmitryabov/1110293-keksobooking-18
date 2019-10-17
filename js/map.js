@@ -25,7 +25,6 @@
 
   var mapPinsContainer = map.querySelector('.map__pins');
 
-
   var mapPinControl = mapPinsContainer.querySelector('.map__pin--main');
 
 
@@ -60,7 +59,6 @@
         function (offers) {
           window.addPinToTimplate(offers);
           handlePinControlClick();
-          window.addPinToTimplate();
         },
         window.showErrorMessage);
   });
@@ -73,7 +71,6 @@
           function (offers) {
             window.addPinToTimplate(offers);
             handlePinControlClick();
-            window.addPinToTimplate();
           },
           window.showErrorMessage);
     }

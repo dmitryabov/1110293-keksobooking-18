@@ -32,11 +32,12 @@
     });
   };
 
+
   // Добавляет готовый шаблон в документ
   window.addPinToTimplate = function (pinsData) {
     pinsData.forEach(function (pin) {
       var pinElement = renderPin(pin);
-
+      window.closeMapCard();
       similarListElement.appendChild(pinElement);
 
       pinElement.addEventListener('click', function () {

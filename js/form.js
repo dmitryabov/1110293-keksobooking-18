@@ -11,6 +11,7 @@
       100: ['0']
     };
 
+
     var roomSelect = document.querySelector('#room_number');
     var capacitySelect = document.querySelector('#capacity');
     var guestCapacity = capacitySelect.querySelector('option:checked');
@@ -28,6 +29,7 @@
 
   var adForm = document.querySelector('.ad-form');
 
+
   // Добавляет атрибут disabled в форму
   window.formDisabled = function adFormDisabled() {
     var child = adForm.querySelectorAll('fieldset');
@@ -42,18 +44,7 @@
   };
 
 
-  var errorHandler = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
-
+  window.formDisabled();
 
   var onSuccess = function () {
     window.formDisabled();
@@ -65,7 +56,7 @@
 
   var form = document.querySelector('.ad-form');
   form.addEventListener('submit', function (evt) {
-    window.upload('https://js.dump.academy/keksobooking', new FormData(form), onSuccess, errorHandler);
+    window.upload('https://js.dump.academy/keksobooking', new FormData(form), onSuccess, window.showErrorMessage);
     evt.preventDefault();
   });
 })();
