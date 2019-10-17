@@ -44,14 +44,6 @@
     childFormList.forEach(function (element) {
       element.removeAttribute('disabled');
     });
-
-
-    window.load('https://js.dump.academy/keksobooking/data',
-        function (offers) {
-          window.addPinToTimplate(offers);
-          handlePinControlClick();
-        },
-        window.showErrorMessage);
   };
 
 
@@ -64,18 +56,26 @@
 
   // Обработчик активации окна
   mapPinControl.addEventListener('click', function () {
-    handlePinControlClick();
-    window.pin();
-    window.card();
+    window.load('https://js.dump.academy/keksobooking/data',
+        function (offers) {
+          window.addPinToTimplate(offers);
+          handlePinControlClick();
+          window.addPinToTimplate();
+        },
+        window.showErrorMessage);
   });
 
 
   // Обработчик активации окна по нажатию на Enter
   mapPinControl.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
-      handlePinControlClick();
-      window.pin();
-      window.card();
+      window.load('https://js.dump.academy/keksobooking/data',
+          function (offers) {
+            window.addPinToTimplate(offers);
+            handlePinControlClick();
+            window.addPinToTimplate();
+          },
+          window.showErrorMessage);
     }
   });
 
@@ -156,6 +156,13 @@
         };
         mapPinControl.addEventListener('click', onClickPreventDefault);
         handlePinControlClick();
+        window.load('https://js.dump.academy/keksobooking/data',
+            function (offers) {
+              window.addPinToTimplate(offers);
+              handlePinControlClick();
+            },
+            window.showErrorMessage);
+
       }
 
     };
