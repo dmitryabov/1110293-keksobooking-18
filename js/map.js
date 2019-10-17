@@ -65,8 +65,8 @@
   // Обработчик активации окна
   mapPinControl.addEventListener('click', function () {
     handlePinControlClick();
-    window.pin();
-    window.card();
+    window.addPinToTimplate();
+    window.addCardToTemplate();
   });
 
 
@@ -74,8 +74,8 @@
   mapPinControl.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
       handlePinControlClick();
-      window.pin();
-      window.card();
+      window.addPinToTimplate();
+      window.addCardToTemplate();
     }
   });
 

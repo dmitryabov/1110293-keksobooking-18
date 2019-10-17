@@ -28,6 +28,7 @@
 
   var adForm = document.querySelector('.ad-form');
 
+
   // Добавляет атрибут disabled в форму
   window.formDisabled = function adFormDisabled() {
     var child = adForm.querySelectorAll('fieldset');
