@@ -37,11 +37,14 @@
   window.addPinToTimplate = function (pinsData) {
     pinsData.forEach(function (pin) {
       var pinElement = renderPin(pin);
-      window.closeMapCard();
       similarListElement.appendChild(pinElement);
-
       pinElement.addEventListener('click', function () {
         window.addCardToTemplate(pin);
+        var ardTemplate = document.querySelector('.map__card');
+        var closeCard = ardTemplate.querySelector('.popup__close');
+        closeCard.addEventListener('click', function () {
+          window.removeCard();
+        });
       });
     });
   };

@@ -30,15 +30,6 @@
   };
 
 
-  var closeCard = similarCardTemplate.querySelector('.popup__close');
-
-  window.closeMapCard = function () {
-    closeCard.addEventListener('click', function () {
-      window.removeCard();
-    });
-  };
-
-
   // Отрисовывает шаблон фотографий в докумен
   var renderPhoto = function (photoElement, card) {
     photoElement.querySelector('.popup__photos').innerHTML = '';
@@ -73,6 +64,14 @@
   window.removeCard = function () {
     similarListElement.removeChild(similarListElement.querySelector('article'));
   };
+
+
+  var closeCard = similarCardTemplate.querySelector('.popup__close');
+
+
+  closeCard.addEventListener('click', function () {
+    window.removeCard();
+  });
 
 
   // Добавляет карточку в шаблон
