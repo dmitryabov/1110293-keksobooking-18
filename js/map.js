@@ -27,10 +27,12 @@
 
   var mapPinControl = mapPinsContainer.querySelector('.map__pin--main');
 
+
   var pinCoords = {
     x: mapPinControl.offsetLeft,
     y: mapPinControl.offsetTop
   };
+
 
   // Алгоритм активации окна
   var handlePinControlClick = function () {
@@ -41,6 +43,13 @@
     childFormList.forEach(function (element) {
       element.removeAttribute('disabled');
     });
+  };
+
+
+  // Алгоритм деактивации окна
+  window.handlePinControDisabledClick = function () {
+    map.classList.add('map--faded');
+    adForm.classList.add('ad-form--disabled');
   };
 
 

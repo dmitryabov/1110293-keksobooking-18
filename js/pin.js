@@ -21,7 +21,6 @@
 
 
   // Отрисовывает шаблон в документ
-
   var renderPin = function (pin) {
     var pinElement = similarPinTemplate.cloneNode(true);
 

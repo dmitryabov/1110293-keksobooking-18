@@ -3,6 +3,8 @@
 
 (function () {
   var map = document.querySelector('.map');
+
+
   // Находит элемент, в который мы будем вставлять похожие объявления
   var similarListElement = map.querySelector('.map__pins');
 
@@ -56,6 +58,11 @@
     cardElement.querySelector('.popup__description').textContent = pin.offer.description;
     cardElement.querySelector('.popup__avatar').setAttribute('src', pin.author.avatar);
     return cardElement;
+  };
+
+  window.removeAllCard = function () {
+    document.querySelector('.popup__photos').innerHTML = '';
+    document.querySelector('.popup__features').innerHTML = '';
   };
 
 

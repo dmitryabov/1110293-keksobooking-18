@@ -55,9 +55,19 @@
   };
 
 
+  var removeAllPins = function () {
+    window.removeAllCard();
+    document.querySelectorAll('.map__pin:not(.map__pin--main)').forEach(function (element) {
+      element.remove();
+    });
+  };
+
   var onSuccess = function () {
     window.formDisabled();
+    window.handlePinControDisabledClick();
+    removeAllPins();
   };
+
 
   var form = document.querySelector('.ad-form');
   form.addEventListener('submit', function (evt) {
