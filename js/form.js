@@ -51,6 +51,7 @@
     window.handlePinControDisabledClick();
     window.removeCard();
     window.removeAllPins();
+    window.showSuccessMessage();
   };
 
 
