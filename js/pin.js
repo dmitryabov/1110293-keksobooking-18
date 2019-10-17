@@ -11,11 +11,6 @@
     .querySelector('.map__pin');
 
 
-  var addItem = function (renderer, data) {
-    return renderer(data);
-  };
-
-
   // Находит элемент, в который мы будем вставлять похожие объявления
   var similarListElement = map.querySelector('.map__pins');
 
@@ -31,6 +26,10 @@
     return pinElement;
   };
 
+  window.removeAllPins = function () {
+    document.querySelectorAll('.map__pins').innerHTML = '';
+  };
+
 
   // Добавляет готовый шаблон в документ
   window.addPinToTimplate = function (pinsData) {
@@ -40,7 +39,7 @@
       similarListElement.appendChild(pinElement);
 
       pinElement.addEventListener('click', function () {
-        window.addCardToTimplate(pinsData);
+        window.addCardToTemplate(pin);
       });
     });
   };

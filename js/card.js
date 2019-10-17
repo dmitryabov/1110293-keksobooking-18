@@ -61,13 +61,16 @@
   };
 
 
+  window.removeCard = function () {
+    document.querySelector('.map__card').innerHTML = '';
+  };
+
+
   // Добавляет карточку в шаблон
-  window.addCardToTimplate = function (cardsData) {
-    cardsData.forEach(function (card) {
-      var cardElement = similarCardTemplate.cloneNode(true);
-      similarListElement.appendChild(window.renderCard(cardElement, card));
-      similarListElement.appendChild(renderFeatures(cardElement, card));
-      similarListElement.appendChild(renderPhoto(cardElement, card));
-    });
+  window.addCardToTemplate = function (card) {
+    var cardElement = similarCardTemplate.cloneNode(true);
+    similarListElement.appendChild(window.renderCard(cardElement, card));
+    similarListElement.appendChild(renderFeatures(cardElement, card));
+    similarListElement.appendChild(renderPhoto(cardElement, card));
   };
 })();
