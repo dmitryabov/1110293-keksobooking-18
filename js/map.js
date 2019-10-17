@@ -2,6 +2,7 @@
 
 
 (function () {
+  var ENTER_KEYCODE = 13;
   var Y_MIN = 150;
   var Y_MAX = 500;
   var X_MIN = 0;
@@ -43,6 +44,14 @@
     childFormList.forEach(function (element) {
       element.removeAttribute('disabled');
     });
+
+
+    window.load('https://js.dump.academy/keksobooking/data',
+        function (offers) {
+          window.addPinToTimplate(offers);
+          handlePinControlClick();
+        },
+        window.showErrorMessage);
   };
 
 
@@ -51,6 +60,24 @@
     map.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
   };
+
+
+  // Обработчик активации окна
+  mapPinControl.addEventListener('click', function () {
+    handlePinControlClick();
+    window.pin();
+    window.card();
+  });
+
+
+  // Обработчик активации окна по нажатию на Enter
+  mapPinControl.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      handlePinControlClick();
+      window.pin();
+      window.card();
+    }
+  });
 
 
   var fillAddressField = function (paramX, paramY) {
@@ -128,13 +155,7 @@
           mapPinControl.removeEventListener('click', onClickPreventDefault);
         };
         mapPinControl.addEventListener('click', onClickPreventDefault);
-        window.load('https://js.dump.academy/keksobooking/data',
-            function (offers) {
-              window.addPinToTimplate(offers);
-              handlePinControlClick();
-            },
-            window.showErrorMessage);
-
+        handlePinControlClick();
       }
 
     };
