@@ -41,7 +41,7 @@
 
   var form = document.querySelector('.ad-form');
   form.addEventListener('submit', function (evt) {
-    window.upload('https://js.dump.academy/keksobooking', new FormData(form), errorHandler);
+    window.upload('https://js.dump.academy/keksobooking', new FormData(form), window.formDisabled);
     evt.preventDefault();
   });
 })();

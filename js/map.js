@@ -24,7 +24,7 @@
 
 
   // Добавляет атрибут disabled в форму
-  function adFormDisabled() {
+  window.formDisabled = function adFormDisabled() {
     var child = adForm.querySelectorAll('fieldset');
 
     function addDisabledAttribute(array) {
@@ -34,9 +34,9 @@
       });
     }
     addDisabledAttribute(child);
-  }
+  };
 
-  adFormDisabled();
+  window.formDisabled();
 
 
   var mapPinsContainer = map.querySelector('.map__pins');
@@ -59,24 +59,6 @@
       element.removeAttribute('disabled');
     });
   };
-
-
-  // Обработчик активации окна
-  mapPinControl.addEventListener('click', function () {
-    handlePinControlClick();
-    window.pin();
-    window.card();
-  });
-
-
-  // Обработчик активации окна по нажатию на Enter
-  mapPinControl.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      handlePinControlClick();
-      window.pin();
-      window.card();
-    }
-  });
 
 
   var fillAddressField = function (paramX, paramY) {
@@ -152,6 +134,7 @@
             function (offers) {
               window.addPinToTimplate(offers);
               window.addCardToTimplate(offers);
+              handlePinControlClick();
             },
             window.showErrorMessage);
 
