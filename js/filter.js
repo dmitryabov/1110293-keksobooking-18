@@ -42,7 +42,7 @@
       filterData = initialData.filter(function (item) {
         return doFiltereType(item);
       });
-      removeElement();
+      window.removeAllPins();
       insertMethod(filterData.slice(0, MAX_DATA));
     });
 

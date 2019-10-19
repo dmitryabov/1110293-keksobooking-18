@@ -16,7 +16,7 @@
 
 
   // Отрисовывает шаблон в документ
-  var renderPin = function (pin) {
+  window.renderPin = function (pin) {
     var pinElement = similarPinTemplate.cloneNode(true);
 
     pinElement.setAttribute('style', 'left: ' + pin.location.x + 'px; top: ' + pin.location.y + 'px;');
@@ -36,7 +36,7 @@
   // Добавляет готовый шаблон в документ
   window.addPinToTimplate = function (pinsData) {
     pinsData.forEach(function (pin) {
-      var pinElement = renderPin(pin);
+      var pinElement = window.renderPin(pin);
       similarListElement.appendChild(pinElement);
       pinElement.addEventListener('click', function () {
         window.addCardToTemplate(pin);
