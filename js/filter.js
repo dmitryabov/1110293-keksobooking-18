@@ -11,18 +11,10 @@
   };
 
   var formFilterElement = document.querySelector('.map__filters');
-  var selectFilterElements = formFilterElement.querySelectorAll('select');
   var housingTypeElement = formFilterElement.querySelector('#housing-type');
   var housingRoomsElement = formFilterElement.querySelector('#housing-rooms');
   var housingGuestsElement = formFilterElement.querySelector('#housing-guests');
   var housingPriceElement = formFilterElement.querySelector('#housing-price');
-
-
-  // Получение метода для удаления элементов
-  var removeElement = null;
-  var setRemoveMethod = function (removeMethod) {
-    removeElement = removeMethod;
-  };
 
 
   // Метод фильтрации элементов
