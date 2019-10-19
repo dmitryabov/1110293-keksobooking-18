@@ -57,7 +57,7 @@
   mapPinControl.addEventListener('click', function () {
     window.load('https://js.dump.academy/keksobooking/data',
         function (offers) {
-          window.addPinToTimplate(offers);
+          window.getFilterData(offers, window.addPinToTimplate, window.util.makeDebounce);
           handlePinControlClick();
         },
         window.showErrorMessage);
@@ -69,7 +69,7 @@
     if (evt.keyCode === ENTER_KEYCODE) {
       window.load('https://js.dump.academy/keksobooking/data',
           function (offers) {
-            window.addPinToTimplate(offers);
+            window.getFilterData(offers, window.addPinToTimplate, window.util.makeDebounce);
             handlePinControlClick();
           },
           window.showErrorMessage);
@@ -155,8 +155,9 @@
         handlePinControlClick();
         window.load('https://js.dump.academy/keksobooking/data',
             function (offers) {
-              window.addPinToTimplate(offers);
+              window.getFilterData(offers, window.addPinToTimplate, window.util.makeDebounce);
               handlePinControlClick();
+
             },
             window.showErrorMessage);
 
