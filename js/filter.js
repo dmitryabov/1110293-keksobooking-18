@@ -40,7 +40,7 @@
 
     onFormFilterChange = doDebounce(function () {
       filterData = initialData.filter(function (item) {
-        return doFiltereType(item);
+        return doFiltereType(item) && doFilterPrice(item) && doFilterRooms(item) && doFilterGuests(item) && doFilterFeatures(item);
       });
       window.removeAllPins();
       insertMethod(filterData.slice(0, MAX_DATA));
@@ -53,5 +53,48 @@
   var doFiltereType = function (element) {
     return housingTypeElement.value === ANY_TYPE || element['offer']['type'] === housingTypeElement.value;
   };
+
+  // Функция фильтрации по цене
+  var doFilterPrice = function (element) {
+    if (housingPriceElement.value !== ANY_TYPE) {
+      switch (housingPriceElement.value) {
+        case 'low':
+          return element['offer']['price'] < Price.LOW;
+        case 'high':
+          return element['offer']['price'] > Price.HIGH;
+        case 'middle':
+          return element['offer']['price'] >= Price.LOW && element['offer']['price'] <= Price.HIGH;
+      }
+    }
+    return true;
+  };
+
+  // Функция фильтрации по количеству комнат
+  var doFilterRooms = function (element) {
+    return housingRoomsElement.value === ANY_TYPE || element['offer']['rooms'] === parseInt(housingRoomsElement.value, 10);
+  };
+
+  // Функция фильтрации по количеству гостей
+  var doFilterGuests = function (element) {
+    return housingGuestsElement.value === ANY_TYPE || element['offer']['guests'] === parseInt(housingGuestsElement.value, 10);
+  };
+
+  // Функция фильтрации по удобствам
+  var doFilterFeatures = function (element) {
+    var featuresElements = formFilterElement.querySelectorAll('.map__checkbox:checked');
+    var checkedFeatures = [];
+
+    featuresElements.forEach(function (item) {
+      checkedFeatures.push(item.value);
+    });
+
+    if (checkedFeatures.length > 0) {
+      return checkedFeatures.every(function (item) {
+        return element['offer']['features'].includes(item);
+      });
+    }
+    return true;
+  };
+
 
 })();
