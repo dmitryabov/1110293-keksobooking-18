@@ -11,44 +11,22 @@
   };
 
   var formFilterElement = document.querySelector('.map__filters');
-  var selectFilterElements = formFilterElement.querySelectorAll('select');
   var housingTypeElement = formFilterElement.querySelector('#housing-type');
   var housingRoomsElement = formFilterElement.querySelector('#housing-rooms');
   var housingGuestsElement = formFilterElement.querySelector('#housing-guests');
   var housingPriceElement = formFilterElement.querySelector('#housing-price');
 
-  // Метод перевода фильтра в неактивное состояние
-  var disableFilter = function () {
-    selectFilterElements.forEach(function (item) {
-      item.disabled = true;
-    });
-    // Сброс значений фильтров
-    resetFilter();
-  };
-
-  // Метод перевода фильтра в активное состояние
-  var enableFilter = function () {
-    selectFilterElements.forEach(function (item) {
-      item.disabled = false;
-    });
-  };
-
-  // Получение метода для удаления элементов
-  var removeElement = null;
-  var setRemoveMethod = function (removeMethod) {
-    removeElement = removeMethod;
-  };
 
   // Метод фильтрации элементов
   var dataFlag = false;
   var onFormFilterChange = null;
 
-  var getFilterData = function (data, insertMethod, insertElement, doDebounce) {
+  window.getFilterData = function (data, insertMethod, doDebounce) {
     var initialData = data.slice();
     var filterData = initialData;
 
     if (!dataFlag) {
-      insertMethod(initialData.slice(0, MAX_DATA), insertElement);
+      insertMethod(initialData.slice(0, MAX_DATA));
       dataFlag = true;
     }
 
@@ -56,8 +34,8 @@
       filterData = initialData.filter(function (item) {
         return doFiltereType(item) && doFilterPrice(item) && doFilterRooms(item) && doFilterGuests(item) && doFilterFeatures(item);
       });
-      removeElement();
-      insertMethod(filterData.slice(0, MAX_DATA), insertElement);
+      window.removeAllPins();
+      insertMethod(filterData.slice(0, MAX_DATA));
     });
 
     formFilterElement.addEventListener('change', onFormFilterChange);
@@ -110,17 +88,5 @@
     return true;
   };
 
-  // Функция сброса всех значений формы фильтров
-  var resetFilter = function () {
-    formFilterElement.reset();
-    dataFlag = false;
-    formFilterElement.removeEventListener('change', onFormFilterChange);
-  };
 
-  window.filter = {
-    disable: disableFilter,
-    enable: enableFilter,
-    initiate: setRemoveMethod,
-    employ: getFilterData
-  };
 })();
