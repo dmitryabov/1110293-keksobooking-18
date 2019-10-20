@@ -1,61 +1,55 @@
 'use strict';
 
-
+//  Модуль отображения сообщений для пользователя
 (function () {
-  var ESC_KEYCODE = 27;
-  var map = document.querySelector('main');
+  var mainPageElement = document.querySelector('main');
 
+  // Метод создания сообщения об ошибке
+  var templateErrorElement = document.querySelector('#error').content.querySelector('.error');
+  var createError = function (message) {
+    var newErrorElement = templateErrorElement.cloneNode(true);
+    var errorMessageElement = newErrorElement.querySelector('.error__message');
+    errorMessageElement.textContent = message;
+    mainPageElement.appendChild(newErrorElement);
 
-  var similarErrorTemplate = document.querySelector('#error')
-  .content
-  .querySelector('.error');
-
-
-  var errorElement = similarErrorTemplate.cloneNode(true);
-  errorElement.classList.add('visually-hidden');
-
-  var closeErrorMessage = errorElement.querySelector('.error__button');
-
-
-  // Обработчик закрытия окна
-  closeErrorMessage.addEventListener('click', function () {
-    errorElement.classList.add('visually-hidden');
-  });
-
-
-  // Обработчик закрытия окна по нажатию на ESC
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      errorElement.classList.add('visually-hidden');
-      successElement.classList.add('visually-hidden');
-    }
-  });
-
-
-  window.showErrorMessage = function () {
-    map.appendChild(errorElement);
-    errorElement.classList.remove('visually-hidden');
+    openBlockMessage(newErrorElement);
   };
 
+  // Метод создания сообщения об успешной отправке формы
+  var templateMessageElement = document.querySelector('#success').content.querySelector('.success');
+  var createSuccess = function () {
+    var newMessageElement = templateMessageElement.cloneNode(true);
+    mainPageElement.appendChild(newMessageElement);
 
-  var similarSuccessTemplate = document.querySelector('#success')
-  .content
-  .querySelector('.success');
-
-  var successElement = similarSuccessTemplate.cloneNode(true);
-  successElement.classList.add('visually-hidden');
-
-  var closeSuccessMessage = successElement.querySelector('.success__message');
-
-  // Обработчик закрытия окна
-  closeSuccessMessage.addEventListener('click', function () {
-    successElement.classList.add('visually-hidden');
-  });
-
-
-  window.showSuccessMessage = function () {
-    map.appendChild(successElement);
-    successElement.classList.remove('visually-hidden');
+    openBlockMessage(newMessageElement);
   };
 
+  // Получение метода обработки события по ESC
+  var pressEsc = null;
+  var setUtil = function (utilMethod) {
+    pressEsc = utilMethod;
+  };
+
+  // Функция закрытия сообщения
+  var openBlockMessage = function (element) {
+    var onBlockEscPress = function (evt) {
+      pressEsc(evt, closeBlockMessage);
+    };
+
+    var closeBlockMessage = function () {
+      mainPageElement.removeChild(element);
+      document.removeEventListener('keydown', onBlockEscPress);
+    };
+
+    document.addEventListener('keydown', onBlockEscPress);
+    element.addEventListener('click', function () {
+      closeBlockMessage(element);
+    });
+  };
+
+  window.message = {
+    getError: createError,
+    getSuccess: createSuccess,
+    initiate: setUtil
+  };
 })();
