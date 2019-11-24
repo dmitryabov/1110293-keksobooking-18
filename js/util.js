@@ -20,7 +20,7 @@
     };
   };
 
-  // Метод выполнения функций по нажатию ESC
+  // Метод выполнения функций после нажатию ESC
   var pressEscKey = function (evt, action) {
     if (evt.keyCode === ESC_KEYCODE) {
       action();

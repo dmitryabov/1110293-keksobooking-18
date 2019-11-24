@@ -3,7 +3,8 @@
 
 (function () {
   var map = document.querySelector('.map');
-
+  var similarListElement = map.querySelector('.map__pins');
+  var priv = similarListElement.querySelector('article')
 
   // Находит шаблон пинов, который мы будем копировать
   var similarPinTemplate = document.querySelector('#pin')
@@ -39,9 +40,12 @@
       var pinElement = window.renderPin(pin);
       similarListElement.appendChild(pinElement);
       pinElement.addEventListener('click', function () {
+        var cardTemplate = document.querySelector('.map__card');
+        if (document.contains(cardTemplate)) {
+          window.removeCard();
+        }
         window.addCardToTemplate(pin);
-        var ardTemplate = document.querySelector('.map__card');
-        var closeCard = ardTemplate.querySelector('.popup__close');
+        var closeCard = document.querySelector('.popup__close');
         closeCard.addEventListener('click', function () {
           window.removeCard();
         });
